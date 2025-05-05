@@ -5,6 +5,16 @@ android {
     namespace 'com.sky.photo'
     compileSdk 34
 
+    signingConfigs {
+        release {
+            storeFile file('userphoto.jks')
+//            storeFile file('ldx.jks')
+            storePassword '123456'
+            keyAlias = 'photo'
+            keyPassword '123456'
+        }
+    }
+
     defaultConfig {
         applicationId "com.sky.photo"
         minSdk 26
