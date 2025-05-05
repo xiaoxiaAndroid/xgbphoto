@@ -1,0 +1,8 @@
+
+rootProject.name = "Photo"
+include ':app'
+include ':camerax'
+include ':compress'
+include ':selector'
+include ':ucrop'
+include ':ijkplayer-java'
