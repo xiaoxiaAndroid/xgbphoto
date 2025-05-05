@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
     //noinspection GroovyAssignabilityCheck
     buildToolsVersion "30.0.3"
-    namespace 'tv.danmaku.ijk'
+    namespace 'tv.danmaku.ijk.media.player'
 
     lintOptions {
         abortOnError false

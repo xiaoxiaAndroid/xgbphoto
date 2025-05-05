@@ -42,4 +42,10 @@ dependencies {
     implementation libs.constraintlayout
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    implementation project(':selector')
+    implementation project(':compress')
+    implementation project(':ucrop')
+    implementation project(":camerax")
+    implementation project(":ijkplayer-java")
 }

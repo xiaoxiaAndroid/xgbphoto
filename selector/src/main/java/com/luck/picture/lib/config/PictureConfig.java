@@ -1,5 +1,6 @@
 package com.luck.picture.lib.config;
 
+
 import com.luck.picture.lib.BuildConfig;
 
 /**
