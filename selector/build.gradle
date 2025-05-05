@@ -31,7 +31,7 @@ ext {
     PUBLISH_ARTIFACT_ID = "pictureselector"
 }
 
-apply from: '../publish.gradle'
+//apply from: '../publish.gradle'
 
 
 dependencies {

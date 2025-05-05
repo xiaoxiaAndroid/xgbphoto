@@ -40,5 +40,5 @@ dependencies {
     implementation "androidx.concurrent:concurrent-futures:${cfgs.futures}"
 }
 
-apply from: '../publish.gradle'
+//apply from: '../publish.gradle'
 //、、
