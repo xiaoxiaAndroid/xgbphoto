@@ -39,3 +39,5 @@ dependencies {
     implementation "androidx.transition:transition:${cfgs.transition}"
     implementation "androidx.concurrent:concurrent-futures:${cfgs.futures}"
 }
+
+apply from: '../publish.gradle'

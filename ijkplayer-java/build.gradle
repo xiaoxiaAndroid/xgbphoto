@@ -23,6 +23,13 @@ android {
     }
 }
 
+ext {
+    PUBLISH_ARTIFACT_ID = "ijkplayer-java"
+}
+
+
+apply from: '../publish.gradle'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
