@@ -9,12 +9,12 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdk 34
     namespace 'top.zibin.luban'
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 34
     }
     buildTypes {
         release {
