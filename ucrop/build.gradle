@@ -119,19 +119,19 @@ afterEvaluate {
 ////                from components.java
 //            }
 
-            aar(MavenPublication) {
-                groupId = 'com.yalantis.ucrop' // 这个是依赖库的组 id
-                artifactId = 'ucrop' // 依赖库的名称（jitpack 都不会使用到）
-                version = versionName
-                // Tell maven to prepare the generated "*.aar" file for publishing
-                if (isAndroidProject) {
-                    artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-                } else {
-                    artifact("$buildDir/libs/${project.getName()}.jar")
-                }
+//            aar(MavenPublication) {
+//                groupId = 'com.yalantis.ucrop' // 这个是依赖库的组 id
+//                artifactId = 'ucrop' // 依赖库的名称（jitpack 都不会使用到）
+//                version = versionName
+//                // Tell maven to prepare the generated "*.aar" file for publishing
+//                if (isAndroidProject) {
+//                    artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+//                } else {
+//                    artifact("$buildDir/libs/${project.getName()}.jar")
+//                }
 //                    artifact javadocsJar
-                artifact sourcesJar
-            }
+//                artifact sourcesJar
+//            }
 
         }
 //        }
