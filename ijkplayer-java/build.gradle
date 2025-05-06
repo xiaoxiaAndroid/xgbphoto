@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-group='com.github.xiaoxiaAndroid'
+
 android {
     // http://tools.android.com/tech-docs/new-build-system/tips
     //noinspection GroovyAssignabilityCheck
@@ -28,9 +27,22 @@ ext {
 }
 
 
-//apply from: '../publish.gradle'
+apply from: '../publish.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "release".
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.xiaoxiaAndroid'
+//                artifactId = 'ijkplayer'
+//                version = '1.0.9'
+//            }
+//        }
+//    }
+//}

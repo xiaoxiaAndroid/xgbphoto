@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-group='com.github.xiaoxiaAndroid'
+
 android {
     compileSdk 34
     namespace 'com.yalantis.ucrop'
@@ -35,7 +34,7 @@ ext {
     PUBLISH_ARTIFACT_ID = "ucrop"
 }
 
-//apply from: '../publish.gradle'
+apply from: '../publish.gradle'
 
 dependencies {
     implementation "androidx.appcompat:appcompat:${cfgs.version_appcompat}"
@@ -45,3 +44,17 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${cfgs.version_recyclerview}"
     implementation "com.google.code.gson:gson:${cfgs.gson}"
 }
+
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "release".
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.xiaoxiaAndroid'
+//                artifactId = 'ucrop'
+//                version = '1.0.9'
+//            }
+//        }
+//    }
+//}

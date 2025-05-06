@@ -1,9 +1,6 @@
 plugins {
     id 'com.android.library'
 }
-apply plugin: 'maven-publish'
-group='com.github.xiaoxiaAndroid'
-
 android {
     compileSdk 34
     namespace 'com.luck.lib.camerax'
@@ -42,5 +39,7 @@ dependencies {
     implementation "androidx.concurrent:concurrent-futures:${cfgs.futures}"
 }
 
-//apply from: '../publish.gradle'
+apply from: '../publish.gradle'
 //、、
+
+

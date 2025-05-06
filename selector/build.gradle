@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-group='com.github.xiaoxiaAndroid'
+
 android {
     compileSdk 34
     namespace 'com.luck.picture.lib'
@@ -32,7 +31,7 @@ ext {
     PUBLISH_ARTIFACT_ID = "pictureselector"
 }
 
-//apply from: '../publish.gradle'
+apply from: '../publish.gradle'
 
 
 dependencies {
@@ -44,3 +43,17 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:${cfgs.viewpage2}"
     implementation "androidx.constraintlayout:constraintlayout:${cfgs.constraintlayout}"
 }
+
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "release".
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.xiaoxiaAndroid'
+//                artifactId = 'pictureselector'
+//                version = '1.0.9'
+//            }
+//        }
+//    }
+//}

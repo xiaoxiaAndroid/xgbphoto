@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-group='com.github.xiaoxiaAndroid'
+
 buildscript {
     repositories {
         jcenter()
@@ -29,6 +28,18 @@ ext {
     PUBLISH_ARTIFACT_ID = "compress"
 }
 
-//apply from: '../publish.gradle'
+apply from: '../publish.gradle'
 
-dependencies {}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "release".
+//            release(MavenPublication) {
+//                from components.release
+//                groupId = 'com.github.xiaoxiaAndroid'
+//                artifactId = 'compress'
+//                version = '1.0.9'
+//            }
+//        }
+//    }
+//}

@@ -79,88 +79,89 @@ artifacts {
     archives javadocsJar, sourcesJar
 }
 
-publishing {
-    publications {
+afterEvaluate {
+    publishing {
+        publications {
 
-        // 这个mavenJava可以随便填，只是一个任务名字而已
-        // MavenPublication必须有，这个是调用的任务类
-        mavenJava(MavenPublication) {
-            // 这里头是artifacts的配置信息，不填会采用默认的
-            groupId = 'org.gradle.sample'
-            artifactId = 'library'
-            version = '1.1'
-            from components.java
-        }
-
-        aar(MavenPublication) {
-            groupId = projectGroupId
-            artifactId = projectArtifactId
-            version = projectVersionName
-            // Tell maven to prepare the generated "*.aar" file for publishing
-            if (isAndroidProject) {
-                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-            } else {
-                artifact("$buildDir/libs/${project.getName()}.jar")
+            // 这个mavenJava可以随便填，只是一个任务名字而已
+            // MavenPublication必须有，这个是调用的任务类
+            mavenJava(MavenPublication) {
+                // 这里头是artifacts的配置信息，不填会采用默认的
+                groupId = 'org.gradle.sample'
+                artifactId = 'library'
+                version = '1.1'
+                from components.java
             }
-            artifact javadocsJar
-            artifact sourcesJar
 
-            pom {
-                name = projectArtifactId
-                description = projectDescription
-                // If your project has a dedicated site, use its URL here
-                url = projectGitUrl
-                licenses {
-                    license {
-                        name = projectLicense
-                        url = projectLicenseUrl
-                    }
+            aar(MavenPublication) {
+                groupId = projectGroupId
+                artifactId = projectArtifactId
+                version = projectVersionName
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                if (isAndroidProject) {
+                    artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+                } else {
+                    artifact("$buildDir/libs/${project.getName()}.jar")
                 }
-                developers {
-                    developer {
-                        id = developerAuthorId
-                        name = developerAuthorName
-                        email = developerAuthorEmail
-                    }
-                }
-                // Version control info, if you're using GitHub, follow the format as seen here
-                scm {
-                    connection = "scm:git:${projectGitUrl}"
-                    developerConnection = "scm:git:${projectGitUrl}"
+                artifact javadocsJar
+                artifact sourcesJar
+
+                pom {
+                    name = projectArtifactId
+                    description = projectDescription
+                    // If your project has a dedicated site, use its URL here
                     url = projectGitUrl
-                }
-                withXml {
-                    def dependenciesNode = asNode().appendNode('dependencies')
-                    project.configurations.implementation.allDependencies.each {
-                        def dependencyNode = dependenciesNode.appendNode('dependency')
-                        dependencyNode.appendNode('groupId', it.group)
-                        dependencyNode.appendNode('artifactId', it.name)
-                        dependencyNode.appendNode('version', it.version)
+                    licenses {
+                        license {
+                            name = projectLicense
+                            url = projectLicenseUrl
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = developerAuthorId
+                            name = developerAuthorName
+                            email = developerAuthorEmail
+                        }
+                    }
+                    // Version control info, if you're using GitHub, follow the format as seen here
+                    scm {
+                        connection = "scm:git:${projectGitUrl}"
+                        developerConnection = "scm:git:${projectGitUrl}"
+                        url = projectGitUrl
+                    }
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        project.configurations.implementation.allDependencies.each {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                        }
                     }
                 }
             }
         }
-    }
 
-    repositories {
-        maven {
-            name = projectArtifactId
+        repositories {
+            maven {
+                name = projectArtifactId
 
-            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            // You only need this if you want to publish snapshots, otherwise just set the URL
-            // to the release repo directly
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                // You only need this if you want to publish snapshots, otherwise just set the URL
+                // to the release repo directly
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
-            // The username and password we've fetched earlier
-            credentials {
-                username mavenUsername
-                password mavenPassword
+                // The username and password we've fetched earlier
+                credentials {
+                    username mavenUsername
+                    password mavenPassword
+                }
             }
         }
     }
 }
-
 signing {
     sign publishing.publications
 }
