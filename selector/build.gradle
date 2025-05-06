@@ -101,6 +101,10 @@ afterEvaluate {
 //                artifact "$buildDir/outputs/aar/${project.name}-picture.aar"
                 // pom文件中声明依赖，从而传递到使用方
 
+            release(MavenPublication) {
+                from components.findByName('release')
+            }
+
             mavenJava(MavenPublication) {
                 // 这里头是artifacts的配置信息，不填会采用默认的
                 groupId = 'com.luck.picture.lib' // 这个是依赖库的组 id

@@ -94,6 +94,11 @@ afterEvaluate {
 //
 //
 //            }
+
+            release(MavenPublication) {
+                from components.findByName('release')
+            }
+
             mavenJava(MavenPublication) {
                 // 这里头是artifacts的配置信息，不填会采用默认的
                 groupId = 'tv.danmaku.ijk.media.player' // 这个是依赖库的组 id
