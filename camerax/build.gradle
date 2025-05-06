@@ -122,7 +122,7 @@ afterEvaluate {
                     version = versionName
                     // Tell maven to prepare the generated "*.aar" file for publishing
                     if (isAndroidProject) {
-                        artifact("$buildDir/outputs/aar/${project.getName()}-camerax.aar")
+                        artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
                     } else {
                         artifact("$buildDir/libs/${project.getName()}.jar")
                     }
