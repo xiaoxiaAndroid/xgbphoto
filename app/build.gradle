@@ -57,9 +57,9 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
-    implementation project(':selector')
-    implementation project(':compress')
-    implementation project(':ucrop')
-    implementation project(":camerax")
-    implementation project(":ijkplayer-java")
+    api project(':selector')
+    api project(':compress')
+    api project(':ucrop')
+    api project(":camerax")
+    api project(":ijkplayer-java")
 }
