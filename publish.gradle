@@ -79,12 +79,12 @@ artifacts {
     archives javadocsJar, sourcesJar
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//
-//            // 这个mavenJava可以随便填，只是一个任务名字而已
-//            // MavenPublication必须有，这个是调用的任务类
+afterEvaluate {
+    publishing {
+        publications {
+
+            // 这个mavenJava可以随便填，只是一个任务名字而已
+            // MavenPublication必须有，这个是调用的任务类
 //            mavenJava(MavenPublication) {
 //                // 这里头是artifacts的配置信息，不填会采用默认的
 //                groupId = 'org.gradle.sample'
@@ -92,77 +92,102 @@ artifacts {
 //                version = '1.1'
 //                from components.java
 //            }
-//
-//            aar(MavenPublication) {
-//                groupId = projectGroupId
-//                artifactId = projectArtifactId
-//                version = projectVersionName
-//                // Tell maven to prepare the generated "*.aar" file for publishing
-//                if (isAndroidProject) {
-//                    artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-//                } else {
-//                    artifact("$buildDir/libs/${project.getName()}.jar")
-//                }
-//                artifact javadocsJar
-//                artifact sourcesJar
-//
-//                pom {
-//                    name = projectArtifactId
-//                    description = projectDescription
-//                    // If your project has a dedicated site, use its URL here
-//                    url = projectGitUrl
-//                    licenses {
-//                        license {
-//                            name = projectLicense
-//                            url = projectLicenseUrl
-//                        }
-//                    }
-//                    developers {
-//                        developer {
-//                            id = developerAuthorId
-//                            name = developerAuthorName
-//                            email = developerAuthorEmail
-//                        }
-//                    }
-//                    // Version control info, if you're using GitHub, follow the format as seen here
-//                    scm {
-//                        connection = "scm:git:${projectGitUrl}"
-//                        developerConnection = "scm:git:${projectGitUrl}"
-//                        url = projectGitUrl
-//                    }
-//                    withXml {
-//                        def dependenciesNode = asNode().appendNode('dependencies')
-//                        project.configurations.implementation.allDependencies.each {
-//                            def dependencyNode = dependenciesNode.appendNode('dependency')
-//                            dependencyNode.appendNode('groupId', it.group)
-//                            dependencyNode.appendNode('artifactId', it.name)
-//                            dependencyNode.appendNode('version', it.version)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        repositories {
-//            maven {
-//                name = projectArtifactId
-//
-//                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-//                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-//                // You only need this if you want to publish snapshots, otherwise just set the URL
-//                // to the release repo directly
-//                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-//
-//                // The username and password we've fetched earlier
-//                credentials {
-//                    username mavenUsername
-//                    password mavenPassword
-//                }
-//            }
-//        }
-//    }
-//}
+
+            aar(MavenPublication) {
+                groupId = projectGroupId
+                artifactId = projectArtifactId
+                version = projectVersionName
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                if (isAndroidProject) {
+                    artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+                } else {
+                    artifact("$buildDir/libs/${project.getName()}.jar")
+                }
+                artifact javadocsJar
+                artifact sourcesJar
+
+                pom {
+                    name = projectArtifactId
+                    description = projectDescription
+                    // If your project has a dedicated site, use its URL here
+                    url = projectGitUrl
+                    licenses {
+                        license {
+                            name = projectLicense
+                            url = projectLicenseUrl
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = developerAuthorId
+                            name = developerAuthorName
+                            email = developerAuthorEmail
+                        }
+                    }
+                    // Version control info, if you're using GitHub, follow the format as seen here
+                    scm {
+                        connection = "scm:git:${projectGitUrl}"
+                        developerConnection = "scm:git:${projectGitUrl}"
+                        url = projectGitUrl
+                    }
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        project.configurations.implementation.allDependencies.each {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = projectArtifactId
+
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                // You only need this if you want to publish snapshots, otherwise just set the URL
+                // to the release repo directly
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                // The username and password we've fetched earlier
+                credentials {
+                    username mavenUsername
+                    password mavenPassword
+                }
+            }
+        }
+    }
+}
 signing {
     sign publishing.publications
 }
 
+//afterEvaluate {
+//    publishing {
+//        def versionName = "0.0.1" // 当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
+//        publications {
+//            release(MavenPublication) {
+//                // Applies the component for the release build variant.
+//                from components.release // 表示发布 release（jitpack 都不会使用到）
+//                // You can then customize attributes of the publication as shown below.
+//                groupId = 'org.gradle.sample' // 这个是依赖库的组 id
+//                artifactId = 'lib-base' // 依赖库的名称（jitpack 都不会使用到）
+//                version = versionName
+//            }
+//        }
+//        repositories {
+//            // 下面这部分，不是很清楚加不加，但是最后加上
+//            maven {
+//                // change URLs to point to your repos, e.g. http://my.org/repo
+//                def baseUrl = buildDir.getParent()
+//                def releasesRepoUrl = "$baseUrl/repos/releases"
+//                def snapshotsRepoUrl = "$baseUrl/repos/snapshots"
+//                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+//            }
+//        }
+//    }
+//}

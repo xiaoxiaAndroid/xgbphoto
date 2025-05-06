@@ -58,7 +58,6 @@ if (isAndroidProject) {
         from sourceSets.main.allJava
     }
 }
-
 tasks.withType(Javadoc).all {
     options {
         encoding "UTF-8"
@@ -98,15 +97,18 @@ afterEvaluate {
 
             release(MavenPublication) {
                 from components.findByName('release')
-            }
-
-            mavenJava(MavenPublication) {
-                // 这里头是artifacts的配置信息，不填会采用默认的
                 groupId = 'top.zibin.luban' // 这个是依赖库的组 id
                 artifactId = 'compress' // 依赖库的名称（jitpack 都不会使用到）
                 version = versionName
-//                from components.java
             }
+
+//            mavenJava(MavenPublication) {
+//                // 这里头是artifacts的配置信息，不填会采用默认的
+//                groupId = 'top.zibin.luban' // 这个是依赖库的组 id
+//                artifactId = 'compress' // 依赖库的名称（jitpack 都不会使用到）
+//                version = versionName
+////                from components.java
+//            }
 
                 aar(MavenPublication) {
                     groupId = 'top.zibin.luban' // 这个是依赖库的组 id

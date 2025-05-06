@@ -72,6 +72,7 @@ tasks.withType(Javadoc).all {
     enabled = false
 }
 
+
 artifacts {
     archives javadocsJar, sourcesJar
 }
@@ -97,15 +98,18 @@ afterEvaluate {
 
             release(MavenPublication) {
                 from components.findByName('release')
-            }
-
-            mavenJava(MavenPublication) {
-                // 这里头是artifacts的配置信息，不填会采用默认的
                 groupId = 'tv.danmaku.ijk.media.player' // 这个是依赖库的组 id
                 artifactId = 'ijkplayer-java' // 依赖库的名称（jitpack 都不会使用到）
                 version = versionName
-//                from components.java
             }
+
+//            mavenJava(MavenPublication) {
+//                // 这里头是artifacts的配置信息，不填会采用默认的
+//                groupId = 'tv.danmaku.ijk.media.player' // 这个是依赖库的组 id
+//                artifactId = 'ijkplayer-java' // 依赖库的名称（jitpack 都不会使用到）
+//                version = versionName
+////                from components.java
+//            }
 
             aar(MavenPublication) {
                 groupId = 'tv.danmaku.ijk.media.player' // 这个是依赖库的组 id
