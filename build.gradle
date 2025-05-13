@@ -54,6 +54,8 @@ allprojects {
     }
 }
 
+apply from: 'config.gradle'
+
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
